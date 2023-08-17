@@ -17,12 +17,8 @@ parser.add_argument("-i", help="override default path to passfile", metavar="pat
 parser.add_argument("params", help="parameters to script if applicable", metavar="params", nargs="*")
 args = parser.parse_args()
 
-if args.i:
-    path_to_passfile = args.i
-else:
-    path_to_passfile = "~/.delegate/passfile"
+path_to_passfile = expanduser(args.i or "~/.delegate/passfile")
 
-path_to_passfile = expanduser(path_to_passfile)
 if not os.path.isfile(path_to_passfile):
     print("Can't find passfile: %s" % path_to_passfile)
     sys.exit(1)
