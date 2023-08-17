@@ -1,4 +1,4 @@
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class Request:
@@ -10,4 +10,3 @@ class Request:
         self.queue = None
         self.index = None
         self.access = None
-

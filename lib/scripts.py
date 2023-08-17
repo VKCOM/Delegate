@@ -1,8 +1,8 @@
+import os
 import subprocess
 from config import config
-import os
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 scripts = config.scripts
 
 
@@ -18,13 +18,14 @@ def launch_script(request):
         os.environ["DELEGATE_USERNAME"] = request.signed_with.decode()
 
     process = subprocess.Popen(
-        args=[scripts[request.script.decode()]["cmd_line"]] + scripts[request.script.decode()]["default_arguments"] +
-        arguments,
+        args=[scripts[request.script.decode()]["cmd_line"]]
+        + scripts[request.script.decode()]["default_arguments"]
+        + arguments,
         executable=scripts[request.script.decode()]["cmd_line"],
         stdin=open("/dev/null", "r"),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        cwd='/'
+        cwd="/",
     )
 
     return process

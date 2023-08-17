@@ -1,10 +1,10 @@
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
 import sys
 import datetime
 
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
+
 
 class Logger:
-
     def __init__(self, outfile=None, verbosity=0):
         self.__name = outfile
         self.writer = sys.stderr if self.__name is None else open(self.__name, "a")

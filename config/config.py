@@ -1,17 +1,14 @@
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 config = {
-    'serve': '0.0.0.0',
-    'port': 2390,
-    'verbosity': 1,
-    'salt1': b"ahThiodai0ohG1phokoo",
-    'salt2': b"Aej1ohv8Naish5Siec3U",
-    'path_to_users': 'config/users',
-    'path_to_policies': 'config/policies',
-    'limit': {
-        'default': 10,
-        'date': 2
-    }
+    "serve": "0.0.0.0",
+    "port": 2390,
+    "verbosity": 1,
+    "salt1": b"ahThiodai0ohG1phokoo",
+    "salt2": b"Aej1ohv8Naish5Siec3U",
+    "path_to_users": "config/users",
+    "path_to_policies": "config/policies",
+    "limit": {"default": 10, "date": 2},
 }
 
 scripts = {

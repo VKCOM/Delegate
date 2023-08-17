@@ -1,7 +1,7 @@
-from lib.policy import Policy
 from config import config
+from lib.policy import Policy
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 cfg = config.config
 
 
@@ -22,7 +22,7 @@ class ConfigLoader:
             return False
         for line in users_fd.readlines():
             if line.strip().encode() == b"":
-                continue    # empty line
+                continue  # empty line
             l = line.strip().encode().split(b"#")[0].strip().split(b":")
             # TODO: move this check somewhere else
             if len(l) > 2:
@@ -39,18 +39,18 @@ class ConfigLoader:
         cnt = 0
         for line in policies_fd.readlines():
             if line.strip().encode() == b"":
-                continue    # empty line
+                continue  # empty line
             cnt += 1
             tokens = line.strip().encode().split(b"#")[0].split(b" ")
             policy = Policy()
             policy.parameters = []
             prev_token = None
             for token in tokens:
-                if prev_token == b'-u':
+                if prev_token == b"-u":
                     policy.user = token
-                elif prev_token == b'-g':
+                elif prev_token == b"-g":
                     policy.group = token
-                elif prev_token == b'-p':
+                elif prev_token == b"-p":
                     policy.parameters.append(token)
                 prev_token = token
             policy.script = tokens[-1]

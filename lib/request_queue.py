@@ -2,7 +2,7 @@ from lib.module import Module
 from lib.scripts import launch_script
 from lib.process import Process
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class RequestQueue(Module):
@@ -43,15 +43,14 @@ class RequestQueue(Module):
         assert self.__active < self.__limit
         self.__prestart -= 1
         if request.access is False:
-            request.client.write_error(b'access_denied')
+            request.client.write_error(b"access_denied")
             return
         self.__active += 1
         request.client.write_start()
         request.process = Process(self._server, launch_script(request), request)
 
     def terminated(self):
-        self._log('Active cleared, in queue: %d' % len(self.__queue), "D", 3)
+        self._log("Active cleared, in queue: %d" % len(self.__queue), "D", 3)
         self.__active -= 1
         self.__done += 1
         yield self._continue(self.run_next, ())
-

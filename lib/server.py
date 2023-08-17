@@ -1,8 +1,8 @@
-import signal
 import queue
+import signal
 from config import config as cfg
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class Server:
@@ -65,16 +65,11 @@ class Server:
         from lib.config_loader import ConfigLoader
         from lib.keymanager import KeyManager
         from lib.policy import PolicyManager
+
         keys = KeyManager(self.log)
 
         policy = PolicyManager(keys, self.log)
-        loader = ConfigLoader(
-            self.log,
-            self.__config["path_to_users"],
-            self.__config["path_to_policies"],
-            policy,
-            keys
-        )
+        loader = ConfigLoader(self.log, self.__config["path_to_users"], self.__config["path_to_policies"], policy, keys)
         if loader.read():
             self.keys = keys
             self.policy = policy
@@ -117,13 +112,13 @@ class Server:
     def enqueue(self, request):
         request.access = self.policy.check_request(request)
         action = request.script.decode()
-        token = cfg.scripts.get(action, {}).get('lock', '')
+        token = cfg.scripts.get(action, {}).get("lock", "")
         if token is None:
-            token = 'default'
+            token = "default"
         if token not in self.__queue:
             limit = 1
-            if 'limit' in self.__config and token in self.__config['limit']:
-                limit = self.__config['limit'][token]
+            if "limit" in self.__config and token in self.__config["limit"]:
+                limit = self.__config["limit"][token]
             self.__queue[token] = self.__queuer(self, limit=limit)
         self.__queue[token].append(request)
 

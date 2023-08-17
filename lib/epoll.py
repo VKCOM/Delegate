@@ -1,7 +1,7 @@
 import select
 from lib.module import Module
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class Epoll(Module):
@@ -22,8 +22,9 @@ class Epoll(Module):
         fileno = handler.fileno()
         assert fileno not in self.__callback
         self.__callback[fileno] = callback
-        self.__epoll.register(handler,
-                              select.EPOLLIN | select.EPOLLOUT | select.EPOLLERR | select.EPOLLHUP | select.EPOLLET)
+        self.__epoll.register(
+            handler, select.EPOLLIN | select.EPOLLOUT | select.EPOLLERR | select.EPOLLHUP | select.EPOLLET
+        )
 
     def unregister(self, handler):
         fileno = handler.fileno()

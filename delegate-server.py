@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 import sys
-
 from config import config
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 config = config.config
 if not isinstance(config, dict):
@@ -28,26 +27,14 @@ if __name__ == "__main__":
     logger = Logger(outfile=config.get("log-file", None), verbosity=config["verbosity"])
     keys = KeyManager(logger)
     policy = PolicyManager(keys, logger)
-    loader = ConfigLoader(
-        logger,
-        config["path_to_users"],
-        config["path_to_policies"],
-        policy,
-        keys
-    )
+    loader = ConfigLoader(logger, config["path_to_users"], config["path_to_policies"], policy, keys)
     res = loader.read()
     if not res:
         logger("Failed to read config. Exiting", "E")
     else:
-        with Server(
-            logger, keys, policy,
-            config=config,
-            queuer=RequestQueue
-        ) as server:
+        with Server(logger, keys, policy, config=config, queuer=RequestQueue) as server:
             epoll = Epoll(server)
             process_pool = Pool(server)
             server_socket = ServerSocket(server, Connector)
             logger("Server started")
             server.run()
-
-

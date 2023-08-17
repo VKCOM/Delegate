@@ -1,4 +1,4 @@
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class Module:
@@ -10,4 +10,5 @@ class Module:
         def continuation():
             nonlocal routine, arguments
             return routine(*arguments)
+
         return continuation

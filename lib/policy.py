@@ -1,10 +1,9 @@
 from config import config
 
-__author__ = 'VK OPS CREW <ncc(at)vk.com>'
+__author__ = "VK OPS CREW <ncc(at)vk.com>"
 
 
 class Policy:
-
     def __init__(self, user=None, group=None, parameters=None, script=None):
         self.user = user
         self.group = group
@@ -13,7 +12,6 @@ class Policy:
 
 
 class PolicyManager:
-
     def __init__(self, key_manager, logger):
         self.policies = []
         self.users = {}
