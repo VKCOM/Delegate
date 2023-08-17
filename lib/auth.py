@@ -51,10 +51,10 @@ class Connector(Module):
         self.__commands[b"queue"] = self.__cmd_queue
 
     # commands
-    def __cmd_test(self, arguments):
+    def __cmd_test(self):
         self.__socket.write(b"test ok\n")
 
-    def __cmd_hello(self, arguments):
+    def __cmd_hello(self):
         self.__hash = (
             hashlib.sha256(self.salt1 + self.__salt_random + (":%d_%d" % (self.__id, self.__local_id)).encode("ascii"))
             .hexdigest()
@@ -70,7 +70,7 @@ class Connector(Module):
             return self.__socket.write(b"run failed")
         self.__run(arguments[0], arguments[1], arguments[2:])
 
-    def __cmd_queue(self, arguments):
+    def __cmd_queue(self):
         if self.__request is None:
             return self.write_error(b"no active request")
         self.write_queue(self.__request.index - self.__request.queue.done)

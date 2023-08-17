@@ -3,9 +3,7 @@ import errno
 import fcntl
 import select
 import signal
-
 from lib.module import Module
-from lib.scripts import launch_script
 
 __author__ = "VK OPS CREW <ncc(at)vk.com>"
 
@@ -18,7 +16,7 @@ class Pool(Module):
         self.__pids = {}
         signal.signal(signal.SIGCHLD, self.__sigchld)
 
-    def __sigchld(self, signo, frame):
+    def __sigchld(self, signo):
         assert signo == signal.SIGCHLD
         # self._log('SIGCHLD')
         self._server.set_sigchld(self._continue(self.__check_all, ()))
